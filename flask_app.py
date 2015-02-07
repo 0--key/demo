@@ -7,17 +7,21 @@ def purify_url(raw_url):
 
 @app.route('/')
 def hello_world():
-    return render_template('index.htm')
+    return render_template('index.htm', home=True)
 
 @app.route('/about')
 def about():
-    return render_template('about.htm')
+    return render_template('about.htm', about=True)
+
+@app.route('/projects/ui')
+def ui_design():
+    return render_template('ui.htm')
 
 
-@app.route('/search')
-def search_item():
+@app.route('/projects/iherb')
+def iherb_visualization():
     name = 'Anton Kosinov'
-    conn = sqlite3.connect('/home/kosmic/mysite/scraped.db')
+    conn = sqlite3.connect('scraped.db')
     cur = conn.cursor()
     query = 'select id, product_id, small_image, thumbnail from products01_img_idxs limit 40 offset 100'
     cur.execute(query)
@@ -45,11 +49,11 @@ def search_item():
         product_properties = cur.fetchone()
         entire_data.append(i+product_properties)
     conn.close()
-    return render_template('search.htm', name=name, products=entire_data)
+    return render_template('iherb.htm', name=name, products=entire_data)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
 
 

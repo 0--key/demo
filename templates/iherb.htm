@@ -1,0 +1,44 @@
+{% extends "_base.htm" %}
+{% block container %}
+<div class="container">
+  <p><br><br><br></p>
+  <div class="row" align="center">
+    <div class="span2">
+    {#<img src="/static/img/logo-med.png">#}
+    </div>
+    <div class="span10">
+      <h2>Hello!!!</h2>
+	{% for product in products %}
+      <img src="http://priceimages.s3.amazonaws.com/{{ product[3] }}" class="img-thumbnail">
+	{% endfor %}
+    </div>
+  </div>
+  <nav>
+    <ul class="pagination" align="center">
+      <li>
+	<a href="#" aria-label="Previous">
+	  <span aria-hidden="true">&laquo;</span>
+	</a>
+      </li>
+      <li class="active"><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li>
+	<a href="#" aria-label="Next">
+	  <span aria-hidden="true">&raquo;</span>
+	</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+{% endblock %}
+
+{#
+	    <a href="#" data-toggle="popover" title="{{ product[4] }}" data-content="And here's some amazing content. It's very engaging. right?"><img src="http://priceimages.s3.amazonaws.com/{{ product[3] }}" class="img-thumbnail"></a>
+	    <ul>
+	      <li>SKU: {{ product[5] }}</li>
+	      <li>Manufacturer: <a href="{{ product[7] }}">{{ product[6] }}</a></li>
+	    </ul>
+#}
