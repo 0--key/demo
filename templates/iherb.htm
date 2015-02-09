@@ -1,18 +1,14 @@
 {% extends "_base.htm" %}
 {% block container %}
 <div class="container">
-  <p><br><br><br></p>
   <div class="row" align="center">
-    <div class="span2">
-    {#<img src="/static/img/logo-med.png">#}
-    </div>
-    <div class="span10">
-      <h2>Hello!!!</h2>
 	{% for product in products %}
-      <img src="http://priceimages.s3.amazonaws.com/{{ product[3] }}" class="img-thumbnail">
+	<div class="col-lg-2 col-xs-3 col-sm-4">
+	<img src="http://priceimages.s3.amazonaws.com/{{ product[3] }}" class="img-thumbnail">
+	</br>
+	{#{ product[4] }#}
+	</div>
 	{% endfor %}
-    </div>
-  </div>
   <nav>
     <ul class="pagination" align="center">
       <li>
@@ -32,6 +28,7 @@
       </li>
     </ul>
   </nav>
+  </div>
 </div>
 {% endblock %}
 
