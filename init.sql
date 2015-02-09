@@ -2,23 +2,33 @@
 --		 SQLite3 database structure
 --***************			**********
 --
+
+/*
+Default crawler behaviour by filling DB with scraped data
+
+1. Known product
+2. Unknown product
+   a) Insertion into products and img_index;
+   b) Insertion into products_var_data
+
+*/
 CREATE TABLE products (id integer primary key autoincrement, name, sku, manufacturer, manuf_url, weight, pack_weight, dimension, description, ingredients, warning, suggested_use);
 --
-CREATE TABLE products_var_data (id integer primary key autoincrement, product_id, store_id, category, cost, srp, is_in_stock, num_reviews, image_URL, meta_keyword, foreign key (product_id) references products01(id), foreign key (store_id) references products01_stores(id));
+CREATE TABLE products_var_data (id integer primary key autoincrement, product_id, store_id, category, cost, srp, is_in_stock, num_reviews, image_URL, meta_keyword, foreign key (product_id) references products(id), foreign key (store_id) references stores(id));
 --
-CREATE TABLE stores (id integer primary key autoincrement, name, url);
+CREATE TABLE stores (id integer primary key autoincrement, s_name, url);--*
 --
-CREATE TABLE premieres (id integer primary key autoincrement, product_id, date, foreign key (product_id) references products01_varied(id));
+CREATE TABLE premieres (id integer primary key autoincrement, product_id, date, foreign key (product_id) references products_var_data(id));
 --
 CREATE TABLE presence (id integer primary key autoincrement, varied_id, in_sale, date, foreign key (varied_id) references products_var_data(id));
 --
-CREATE TABLE img_index (id integer primary key autoincrement, product_id, image, small_image, thumbnail,foreign key (product_id) references products01(id));
+CREATE TABLE img_index (id integer primary key autoincrement, product_id, image, small_image, thumbnail, foreign key (product_id) references products(id));
 --
-CREATE TABLE price_wave (id integer primary key autoincrement, product_id, new_price, old_price, date, foreign key (product_id) references products01_varied(id));
+CREATE TABLE price_wave (id integer primary key autoincrement, product_id, new_price, old_price, date, foreign key (product_id) references products_var_data(id));
 --
-CREATE TABLE in_stock_wave (id integer primary key autoincrement, product_id, in_stock, old_in_stock, date, foreign key (product_id) references products01_varied(id));
+CREATE TABLE in_stock_wave (id integer primary key autoincrement, product_id, in_stock, old_in_stock, date, foreign key (product_id) references products_var_data(id));
 --
---
+-- Indexes below
 --
 CREATE INDEX img_index_img ON img_index(image);
 --
