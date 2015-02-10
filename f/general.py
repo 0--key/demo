@@ -19,12 +19,29 @@ def clean_data_set(raw_data_set):
         data.append(tuple(j))
     return data
 
+
+def get_page_range(n, pages_tot):
+    """Returns pagination range"""
+    m = 10  # pagination length
+    l = n - 5
+    r = n + 6
+    if l < 1:
+        l = l + abs(l) + 1
+        r = l + m
+    if r > pages_tot:
+        r = pages_tot
+        l = r - m
+    p_range = range(l, r)
+    return p_range
+
+
 def paginate(paginator, pages_num):
     """Cooke pagination values"""
     cur_page = paginator['cur_page']
     per_page = paginator['item_per_page']
     pag_data = []
-    for i in range(cur_page - 5, cur_page + 6):
+    page_range = get_page_range(cur_page, pages_num)
+    for i in page_range:
         if i == cur_page:
             act = 1
         else:
