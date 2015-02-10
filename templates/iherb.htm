@@ -2,6 +2,19 @@
 {% block container %}
 <div class="container">
   <div class="row" align="center">
+   <nav>
+     <ul class="pagination" align="center">
+       {% for j in pagination %}
+       <li
+	  {% if j.active %} class="active"{% endif %}>
+	 <a href="/projects/iherb/page/{{ j.n }}">{{ j.n }}</a>
+       </li>
+       {% endfor %}
+     </ul>
+   </nav>
+  </div>
+
+  <div class="row" align="center">
 	{% for product in products %}
 	<div class="col-lg-2 col-xs-3 col-sm-4">
 	<img src="http://priceimages.s3.amazonaws.com/{{ product[3] }}" class="img-thumbnail">
@@ -9,25 +22,18 @@
 	{#{ product[4] }#}
 	</div>
 	{% endfor %}
-  <nav>
-    <ul class="pagination" align="center">
-      <li>
-	<a href="#" aria-label="Previous">
-	  <span aria-hidden="true">&laquo;</span>
-	</a>
-      </li>
-      <li class="active"><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5</a></li>
-      <li>
-	<a href="#" aria-label="Next">
-	  <span aria-hidden="true">&raquo;</span>
-	</a>
-      </li>
-    </ul>
-  </nav>
+  </div>
+  <div class="row" align="center">
+   <nav>
+     <ul class="pagination" align="center">
+       {% for j in pagination %}
+       <li
+	  {% if j.active %} class="active"{% endif %}>
+	 <a href="/projects/iherb/page/{{ j.n }}">{{ j.n }}</a>
+       </li>
+       {% endfor %}
+     </ul>
+   </nav>
   </div>
 </div>
 {% endblock %}

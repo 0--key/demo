@@ -1,7 +1,7 @@
 import sqlite3
 from flask import Flask, render_template
 from f.general import purify_url
-from f.db import dumb_extractor
+from f.db import dumb_extractor, page_data
 
 
 app = Flask(__name__)
@@ -22,10 +22,13 @@ def ui_design():
     return render_template('ui.htm')
 
 
-@app.route('/projects/iherb')
-def iherb_visualization():
-    entire_data = dumb_extractor(20)
-    return render_template('iherb.htm', products=entire_data)
+@app.route('/projects/iherb/', defaults={'page': 1})
+@app.route('/projects/iherb/page/<int:page>')
+def iherb_visualization(page):
+    paginator = {'cur_page': page, 'item_per_page': 25}
+    (products, pagination) = page_data(paginator)    
+    return render_template('iherb.htm', products=products,
+                           pagination=pagination)
 
 
 if __name__ == '__main__':
