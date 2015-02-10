@@ -6,10 +6,17 @@
 /*
 Default crawler behaviour by filling DB with scraped data
 
-1. Known product
-2. Unknown product
+Product detection algorythm:
+1. Known product:
+   a) Firstly in certain store:
+   b) NOT firstly in certain store:
+2. Unknown product:
    a) Insertion into products and img_index;
-   b) Insertion into products_var_data
+   b) Insertion into products_var_data;
+   c) Insertion into img_index
+
+Global product premiere (totally new product)
+Local product premiere (new product for certain store)
 
 */
 CREATE TABLE products (id integer primary key autoincrement, name, sku, manufacturer, manuf_url, weight, pack_weight, dimension, description, ingredients, warning, suggested_use);
