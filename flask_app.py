@@ -1,7 +1,7 @@
 import sqlite3
 from flask import Flask, render_template
 from f.general import purify_url
-from f.db import dumb_extractor, page_data
+from f.db import page_data
 
 
 app = Flask(__name__)
@@ -36,7 +36,7 @@ def teal():
 @app.route('/projects/iherb/page/<int:page>')
 def iherb_visualization(page):
     paginator = {'cur_page': page, 'item_per_page': 25}
-    (products, pagination) = page_data(paginator)    
+    (products, pagination) = page_data(paginator)
     return render_template('iherb.htm', products=products,
                            pagination=pagination)
 

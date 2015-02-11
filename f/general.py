@@ -3,12 +3,16 @@ All general functions are here
 """
 
 
+replacement = {"'": '%27', '.': '%2E', '+': '%2B', '`': '%60',
+               '#': '%23', ' ': '%20', '%': '%25'}
+
+
 def purify_url(raw_url):
     """Replases prohibited symbols out from raw url"""
-    return str(raw_url).replace('%', '%25').\
-      replace("'", '%27').replace(' ', '%20').\
-      replace('`', '%60').replace('#', '%23').\
-      replace('+', '%2B').replace('.', '%2E')
+    clear_url = str(raw_url)
+    for k in replacement:
+        clear_url = clear_url.replace(k, replacement[k])
+    return clear_url
 
 
 def clean_data_set(raw_data_set):
@@ -16,11 +20,10 @@ def clean_data_set(raw_data_set):
     data = []
     for k in raw_data_set:
         j = list(k)
-        if '%' in j[2] or "'" in j[2] or " " in j[2]\
-          or "`" in j[2] or "#" in j[2] or "#" in j[2]\
-          or '.' in j[2]:
-            j[2] = purify_url(j[2])
-            j[3] = purify_url(j[3])
+        for l in replacement.keys():
+            if l in j[2]:
+                j[2] = purify_url(j[2])
+                j[3] = purify_url(j[3])
         data.append(tuple(j))
     return data
 
