@@ -17,9 +17,19 @@ def about():
     return render_template('about.htm', about=True)
 
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.htm', contact=True)
+
+
 @app.route('/projects/ui')
 def ui_design():
     return render_template('ui.htm')
+
+
+@app.route('/projects/teal')
+def teal():
+    return render_template('teal.htm')
 
 
 @app.route('/projects/iherb/', defaults={'page': 1})
