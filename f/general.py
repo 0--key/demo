@@ -35,6 +35,7 @@ def convert_product_name(raw_data_set):
     l[0] = ", ".join(l[0].split(", ")[1:])
     return tuple(l)
 
+
 def get_page_range(n, pages_tot):
     """Returns pagination range"""
     m = 10  # pagination length
