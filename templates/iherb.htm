@@ -15,9 +15,14 @@
    </nav>
   </div>
 <!-- products grid -->
-  <div class="row" align="center">
+<div class="row" align="center">
+  {% for product in products %}
+  {% if loop.first %}
+  <div class="row">
+    {% endif %}
+    {% if loop.index is divisibleby 3 %}
     <div class="row">
-      {% for product in products %}
+      {% endif %}
       <div class="col col-lg-4 col-sm-6">
 	<div class="thumbnail" itemscope="" itemtype="http://schema.org/Product">
 	  <a href="/brands/giant/products/anthem-27-dot-5-1-2014" title="{{ product[4] }}">
@@ -32,9 +37,14 @@
 	  </div>
 	</div>
       </div>
-      {% endfor %}
+      {% if loop.index is divisibleby 3 %}
     </div>
+    {% endif %}
+    {% if loop.last %}
   </div>
+  {% endif %}
+  {% endfor %}
+</div>
 
 <!-- bottom pagination  -->
   <div class="row" align="center">

@@ -1,6 +1,6 @@
 import sqlite3
 from settings import item_per_page
-from general import clean_data_set, paginate
+from general import clean_data_set, paginate, convert_product_name
 
 
 """
@@ -34,7 +34,7 @@ def page_data(paginator):
         q_var = (i[1],)
         cur.execute('select name, sku, manufacturer, manuf_url \
         from products WHERE id=?', q_var)
-        product_properties = cur.fetchone()
+        product_properties = convert_product_name(cur.fetchone())
         page_data_set.append(i+product_properties)
     conn.close()
     return page_data_set, paginator_data

@@ -1,3 +1,4 @@
+import logging
 """
 All general functions are here
 """
@@ -27,6 +28,12 @@ def clean_data_set(raw_data_set):
         data.append(tuple(j))
     return data
 
+
+def convert_product_name(raw_data_set):
+    """Replace manufacturer name out from product name"""
+    l = list(raw_data_set)
+    l[0] = ", ".join(l[0].split(", ")[1:])
+    return tuple(l)
 
 def get_page_range(n, pages_tot):
     """Returns pagination range"""
