@@ -9,23 +9,18 @@ replacement = {"'": '%27', '.': '%2E', '+': '%2B', '`': '%60',
                '#': '%23', ' ': '%20', '%': '%25'}
 
 
-def purify_url(raw_url):
-    """Replases prohibited symbols out from raw url"""
-    clear_url = str(raw_url)
-    for k in replacement:
-        clear_url = clear_url.replace(k, replacement[k])
-    return clear_url
-
-
 def clean_data_set(raw_data_set):
-    """Puryfies data set"""
+    """Replaces prohibited symbols out from data set"""
     data = []
     for k in raw_data_set:
         j = list(k)
         for l in replacement.keys():
-            if l in j[2]:
-                j[2] = purify_url(j[2])
-                j[3] = purify_url(j[3])
+            if l in str(j[2]):
+                j[2] = str(j[2]).replace(l, replacement[l])
+                j[3] = str(j[3]).replace(l, replacement[l])
+                j[4] = str(j[4]).replace(l, replacement[l])
+            else:
+                pass
         data.append(tuple(j))
     return data
 
@@ -34,7 +29,7 @@ def process_product_data(raw_data_set):
     """Replace manufacturer name out from product name"""
     l = list(raw_data_set)
     l[1] = ", ".join(l[1].split(", ")[1:])
-    #  l[8] = Markup(l[8])
+    l[8] = Markup(l[8])
     return tuple(l)
 
 

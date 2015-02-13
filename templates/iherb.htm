@@ -37,7 +37,29 @@
 	  </div>
 	  <div class="bs-example popover-demo">
 	    <div class="bs-example-popovers">
-	      <button type="button" class="btn btn-info" data-container="body" data-toggle="popover" data-placement="bottom" title="{{ product[6] }}" data-content="{{ product[13]|safe }}">Info</button>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{{ product[5] }}">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal{{ product[5] }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{ product[6] }}</h4>
+      </div>
+      <div class="modal-body"><img alt="{{ product[6] }}" src="http://priceimages.s3.amazonaws.com/{{ product[3] }}"></br><b>Description:</b></br>{{ product[13] }}</br><b>Ingredients:</b><br>{{ product[14] }}</br><b>Warnings:</b><br>{{ product[15] }}</br><b>Suggested Use:</b><br>{{ product[16] }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 	    </div>
 	  </div>
 	</div>
