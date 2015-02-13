@@ -1,6 +1,6 @@
 import sqlite3
 from settings import item_per_page
-from general import clean_data_set, paginate, convert_product_name
+from general import clean_data_set, paginate, process_product_data
 
 
 """
@@ -24,16 +24,15 @@ def page_data(paginator):
     (paginator_data, offset) = paginate(paginator, total_pages_num)
     # Prepare page dataset
     query_var = (item_per_page, offset)
-    cur.execute('select id, product_id, small_image, thumbnail \
-    from img_index limit ? offset ?', query_var)
+    cur.execute('SELECT * FROM img_index LIMIT ? OFFSET ?', query_var)
     raw_data = cur.fetchall()
     # lets purify the raw data:
     data = clean_data_set(raw_data)
     page_data_set = []
     for i in data:
         q_var = (i[1],)
-        cur.execute('select * from products WHERE id=?', q_var)
-        product_properties = convert_product_name(cur.fetchone())
+        cur.execute('SELECT * FROM products WHERE id=?', q_var)
+        product_properties = process_product_data(cur.fetchone())
         page_data_set.append(i+product_properties)
     conn.close()
     return page_data_set, paginator_data

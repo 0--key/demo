@@ -1,4 +1,5 @@
 import logging
+from flask import Markup
 """
 All general functions are here
 """
@@ -29,10 +30,11 @@ def clean_data_set(raw_data_set):
     return data
 
 
-def convert_product_name(raw_data_set):
+def process_product_data(raw_data_set):
     """Replace manufacturer name out from product name"""
     l = list(raw_data_set)
     l[1] = ", ".join(l[1].split(", ")[1:])
+    #  l[8] = Markup(l[8])
     return tuple(l)
 
 
