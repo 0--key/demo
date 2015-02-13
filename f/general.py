@@ -32,7 +32,7 @@ def clean_data_set(raw_data_set):
 def convert_product_name(raw_data_set):
     """Replace manufacturer name out from product name"""
     l = list(raw_data_set)
-    l[0] = ", ".join(l[0].split(", ")[1:])
+    l[1] = ", ".join(l[1].split(", ")[1:])
     return tuple(l)
 
 
