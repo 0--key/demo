@@ -35,9 +35,9 @@ def process_product_data(raw_data_set):
 
 def get_page_range(n, pages_tot):
     """Returns pagination range"""
-    m = 10  # pagination length
-    l = n - 5
-    r = n + 6
+    m = 6  # pagination length
+    l = n - m / 2 + 1
+    r = n + m / 2
     if l < 1:
         l = l + abs(l) + 1
         r = l + m
