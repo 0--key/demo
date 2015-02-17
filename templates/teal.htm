@@ -14,5 +14,28 @@
         <h1>Automatic summarization online</h1>
       </div>
       <!-- -->
-
+      <div class="row">
+	<div class="col col-lg-6">
+	  <form action="/project/teal" role="form">
+	    <div class="form-group">
+	      <label for="name">Name</label>
+	      <input type="text" class="form-control" id="name" 
+		     placeholder="Insert text here please">
+	    </div>
+	    <button type="submit" class="btn btn-info">Submit</button>
+	  </form>
+	  </div>
+	<div class="col col-lg-6">
+	  <p>
+	    {% for i in tagged_words %}
+	    {% if i.tag %}
+	    <button type="button" class="btn {{ i.tag[0] }}">{{ i.word }}</button>
+	    {% else %}
+	    {{ i.word }} 
+	    {% endif %}
+	    {% endfor %}
+	  </p>
+	</div>
+      </div>
+    </div>
 {% endblock %}

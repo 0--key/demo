@@ -27,7 +27,10 @@ def ui_design():
 
 @app.route('/projects/teal')
 def teal():
-    return render_template('teal.htm')
+    t_words = (
+        {"word": "Main", "tag": ("btn-primary", 1)},
+        {"word": "purpose", "tag": ""})
+    return render_template('teal.htm', tagged_words=t_words)
 
 
 @app.route('/projects/iherb/', defaults={'page': 1})
