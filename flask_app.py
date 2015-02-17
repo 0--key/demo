@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from f.db import page_data
-
+from f.nlp import tag_text
 
 app = Flask(__name__)
 
@@ -25,11 +25,12 @@ def ui_design():
     return render_template('ui.htm')
 
 
-@app.route('/projects/teal')
+@app.route('/projects/teal', methods = ['POST', 'GET'])
 def teal():
-    t_words = (
-        {"word": "Main", "tag": ("btn-primary", 1)},
-        {"word": "purpose", "tag": ""})
+    if request.method == 'POST':
+        t_words = tag_text(request.form['input_text'])
+    else:
+        t_words = ()
     return render_template('teal.htm', tagged_words=t_words)
 
 

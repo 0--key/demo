@@ -1,0 +1,9 @@
+"""
+All natural language processing functions are here
+"""
+
+def tag_text():
+    t_words = (
+        {"word": "Main", "tag": ("btn-primary", 1)},
+        {"word": "purpose", "tag": ""})
+    return t_words

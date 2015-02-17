@@ -16,10 +16,10 @@
       <!-- -->
       <div class="row">
 	<div class="col col-lg-6">
-	  <form action="/project/teal" role="form">
+	  <form action="/projects/teal" role="form" method="post">
 	    <div class="form-group">
 	      <label for="name">Name</label>
-	      <input type="text" class="form-control" id="name" 
+	      <input type="text" class="form-control" name="input_text" 
 		     placeholder="Insert text here please">
 	    </div>
 	    <button type="submit" class="btn btn-info">Submit</button>
@@ -28,7 +28,7 @@
 	<div class="col col-lg-6">
 	  <p>
 	    {% for i in tagged_words %}
-	    {% if i.tag %}
+	    {% if i.tag[0] %}
 	    <button type="button" class="btn {{ i.tag[0] }}">{{ i.word }}</button>
 	    {% else %}
 	    {{ i.word }} 
