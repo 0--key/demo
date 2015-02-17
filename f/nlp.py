@@ -18,11 +18,19 @@ def tag_text(raw_text):
         for k in j:
             tagged_text.append(k)
     t_text = ()
+    tagged_word = {}
     for L in tagged_text:
         word, w_tag = L
         if w_tag in pos_replacement.keys():
-            size = 'xs' ## gradation for significant data
+            if tagged_word['tag']:
+                # join together and enlarge in collocation case
+                size = 'sm'
+                previous_word = tagged_word['word']
+            else:
+                size = 'xs' ## gradation for significant data
             tag = pos_replacement[w_tag]
+            if tagged_word['tag']:
+                    word = tagged_word['word'] + ' ' + word
             tagged_word = {'word': word, 'tag': tag, 'size': size}
             print tagged_word
         else:
