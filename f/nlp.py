@@ -31,6 +31,7 @@ def tag_text(raw_text):
             tag = pos_replacement[w_tag]
             if tagged_word['tag']:
                     word = tagged_word['word'] + ' ' + word
+                    t_text = t_text[:-1]
             tagged_word = {'word': word, 'tag': tag, 'size': size}
             print tagged_word
         else:
