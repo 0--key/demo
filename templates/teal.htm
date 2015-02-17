@@ -28,14 +28,17 @@
 	<div class="col col-lg-6">
 	  <p>
 	    {% for i in tagged_words %}
-	    {% if i.tag[0] %}
-	    <button type="button" class="btn {{ i.tag[0] }}">{{ i.word }}</button>
+	    {% if i.tag %}
+	    <button type="button" class="btn {{ i.tag }} btn-{{ i.size }}">{{ i.word }}</button>
 	    {% else %}
 	    {{ i.word }} 
 	    {% endif %}
 	    {% endfor %}
 	  </p>
 	</div>
+      </div>
+      <div class="row">
+	<p>{% if t_text %}{% for j in t_text %} {{ j[0] }}  :  <strong>{{ j[1] }}</strong></t>{% endfor %}{% endif %}</p>
       </div>
     </div>
 {% endblock %}
