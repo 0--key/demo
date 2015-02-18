@@ -20,8 +20,10 @@ def summ(raw_text):
         if w_tag in pos_replacement.keys():
             if tagged_word['tag']:
                 # join together and enlarge in collocation case
-                size = 'sm'
-                previous_word = tagged_word['word']
+                if len(tagged_word['word']) == 2:
+                    size = 'lg'
+                else:
+                    size = 'sm'
             else:
                 size = 'xs' ## gradation for significant data
             tag = pos_replacement[w_tag]
