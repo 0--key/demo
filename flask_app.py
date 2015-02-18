@@ -28,10 +28,13 @@ def ui_design():
 @app.route('/projects/teal', methods = ['POST', 'GET'])
 def teal():
     if request.method == 'POST':
-        t_words = summ(request.form['input_text'])
+        input_text = request.form['input_text']
+        t_words = summ(input_text)
     else:
         t_words = ()
-    return render_template('teal.htm', tagged_words=t_words)
+        input_text = ''
+    return render_template('teal.htm', tagged_words=t_words,
+                           input_text=input_text)
 
 
 @app.route('/projects/iherb/', defaults={'page': 1})

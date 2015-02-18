@@ -14,17 +14,9 @@
         <h1>Automatic summarization online</h1>
       </div>
       <!-- -->
-      <div class="row">
-	<div class="col col-lg-6">
-	  <form action="/projects/teal" role="form" method="post">
-	    <div class="form-group">
-	      <label for="name">Name</label>
-	      <input type="text" class="form-control" name="input_text" 
-		     placeholder="Insert text here please">
-	    </div>
-	    <button type="submit" class="btn btn-info">Submit</button>
-	  </form>
-	  </div>
+      <div class="row">{% if input_text %}
+	<div class="col col-lg-6"><p>{{ input_text }}</p>
+	</div>
 	<div class="col col-lg-6">
 	  <p>
 	    {% for i in tagged_words %}
@@ -36,9 +28,15 @@
 	    {% endfor %}
 	  </p>
 	</div>
+	{% endif %}
+	<div class="col col-lg-12">
+	     <form action="/projects/teal" role="form" method="post">
+	       <div class="form-group">
+		 <label for="comment">Input text here:</label>
+		 <textarea class="form-control" rows="5" id="comment" name="input_text" placeholder="Please insert text here"></textarea>
+		 <button type="submit" class="btn btn-info">Summarize</button>
+	       </div>
+	     </form>
+	</div>
       </div>
-      <div class="row">
-	<p>{% if t_text %}{% for j in t_text %} {{ j[0] }}  :  <strong>{{ j[1] }}</strong></t>{% endfor %}{% endif %}</p>
-      </div>
-    </div>
 {% endblock %}

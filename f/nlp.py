@@ -20,13 +20,18 @@ def summ(raw_text):
         if w_tag in pos_replacement.keys():
             if tagged_word['tag']:
                 # join together and enlarge in collocation case
-                if len(tagged_word['word']) == 2:
+                if len(tagged_word['word'].split()) > 1:
                     size = 'lg'
                 else:
                     size = 'sm'
             else:
                 size = 'xs' ## gradation for significant data
-            tag = pos_replacement[w_tag]
+            # tag behaviour
+            new_tag = pos_replacement[w_tag]
+            if tagged_word['tag'] == 'btn-primary':
+                tag = 'btn-primary'
+            else:
+                tag = pos_replacement[w_tag]
             if tagged_word['tag']:
                     word = tagged_word['word'] + ' ' + word
                     summ_text = summ_text[:-1]
