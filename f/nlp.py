@@ -25,7 +25,7 @@ def summ(raw_text):
                 else:
                     size = 'sm'
             else:
-                size = 'xs' ## gradation for significant data
+                size = 'xs'  # gradation for significant data
             # tag behaviour
             new_tag = pos_replacement[w_tag]
             if tagged_word['tag'] == 'btn-primary':
@@ -36,9 +36,8 @@ def summ(raw_text):
                     word = tagged_word['word'] + ' ' + word
                     summ_text = summ_text[:-1]
             tagged_word = {'word': word, 'tag': tag, 'size': size}
-            print tagged_word
         else:
-            size = 'normal' ## gradation for noisy data 
+            size = 'normal'  # gradation for noisy data
             tagged_word = {'word': word, 'tag': '', 'size': size}
         summ_text = summ_text + (tagged_word,)
     return summ_text

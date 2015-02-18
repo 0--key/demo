@@ -25,7 +25,7 @@ def ui_design():
     return render_template('ui.htm')
 
 
-@app.route('/projects/teal', methods = ['POST', 'GET'])
+@app.route('/projects/teal', methods=['POST', 'GET'])
 def teal():
     if request.method == 'POST':
         input_text = request.form['input_text']
