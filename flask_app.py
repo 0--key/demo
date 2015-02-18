@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from f.db import page_data
-from f.nlp import tag_text
+from f.nlp import summ
 
 app = Flask(__name__)
 
@@ -28,11 +28,10 @@ def ui_design():
 @app.route('/projects/teal', methods = ['POST', 'GET'])
 def teal():
     if request.method == 'POST':
-        t_words, t_text = tag_text(request.form['input_text'])
+        t_words = summ(request.form['input_text'])
     else:
         t_words = ()
-        t_text = ()
-    return render_template('teal.htm', tagged_words=t_words, t_text=t_text)
+    return render_template('teal.htm', tagged_words=t_words)
 
 
 @app.route('/projects/iherb/', defaults={'page': 1})

@@ -13,3 +13,4 @@ sudo mkdir /usr/share/nltk_data
 sudo chmod g+w /usr/share/nltk_data/
 sudo chgrp antony /usr/share/nltk_data/
 python -m nltk.downloader -d /usr/share/nltk_data all
+# punkt, maxent_treebank_pos_tagger
