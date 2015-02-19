@@ -24,17 +24,13 @@
     <div class="row">
       {% endif %}
       <div class="col col-lg-4 col-sm-6">
-	<div class="thumbnail" itemscope=""><!-- itemtype="http://schema.org/Product"-->
-	  <a href="/brands/giant/products/anthem-27-dot-5-1-2014" title="{{ product[6] }}">
-	    <img alt="Anthem 27.5 1 2014" itemprop="image" src="http://priceimages.s3.amazonaws.com/{{ product[4] }}">
-	  </a>
-	  <a href="/brands/giant/products/anthem-27-dot-5-1-2014" itemprop="url" title="{{ product[6] }}">
+	<div class="thumbnail" itemscope="">
+	    <img alt="{{ product[6] }}" src="http://priceimages.s3.amazonaws.com/{{ product[4] }}">
+	    <span>{{ product[6] }}</span></br>
 	    <span itemprop="brand"><b>{{ product[8] }}</b></span>
-	    <p><span itemprop="name">{{ product[6] }}</span></p>
-	  </a>
-	  <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+	  <!--div itemprop="offers" itemscope="">
 	    <span class="label label-danger" itemprop="price">£2,249.00</span>
-	  </div>
+	  </div-->
 	  <div class="bs-example popover-demo">
 	    <div class="bs-example-popovers">
 
