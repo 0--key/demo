@@ -1,7 +1,7 @@
 import sqlite3
 from settings import item_per_page
 from general import clean_data_set, paginate, process_product_data
-
+from models import Product
 
 """
 Resolves interactions with DB
