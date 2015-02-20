@@ -1,5 +1,5 @@
 """
-All data models are here
+All necessary data models are here
 """
 
 class Product():
