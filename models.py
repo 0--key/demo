@@ -11,12 +11,3 @@ class Product():
         self.t_img = ''
         self.s_img = ''
         self.l_img = ''
-
-    def __repr__(self):
-        r = {
-            "name": self.name,
-            "t_img": self.t_img,
-            "s_img": self.s_img,
-            "l_img": self.l_img
-        }
-        return r
