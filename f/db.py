@@ -60,15 +60,17 @@ def get_cat_tree():
             AND category=?', (depth, j))
             n = cur.fetchone()
             if n:  # skip insertion
-                p_id = n
+                p_id = n[0]
                 depth = depth + 1
                 continue
             else:
-                cur.execute('INSERT INTO categories VALUES ("NULL", \
-                ?,?,?)', (j, p_id, depth))
-                print (j, p_id, depth)
+                print j
+                j = j.replace(';', '')
+                cur.execute('INSERT INTO categories(category, parent_id, depth) VALUES (?,?,?)', (buffer(j), p_id, depth))
+                print (buffer(j), p_id, depth)
                 p_id = cur.lastrowid
                 depth = depth + 1
+                conn.commit()
     conn.close()
 
 def get_catalogue():
