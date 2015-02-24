@@ -39,6 +39,38 @@ def page_data(paginator):
     return page_data_set, paginator_data, catalogue
 
 
+def get_cat_tree():
+    """
+    Extracts categories relations out from DB
+    {'first_category': {'child':
+    CREATE TABLE categories (id integer primary key autoincrement, category, parent_id, depth, foreign key (parent_id) references categories(id));
+    """
+    conn = sqlite3.connect('scraped.db')
+    cur = conn.cursor()
+    cur.execute('SELECT category FROM products_var_data')
+    raw_categories = cur.fetchall()
+    catalogue_data = ()
+    for i in raw_categories:
+        categories = i[0].split('/')[1:]
+        depth = 1
+        p_id = 1
+        for j in categories:
+            # does this category exists already:
+            cur.execute('SELECT id FROM categories WHERE depth=? \
+            AND category=?', (depth, j))
+            n = cur.fetchone()
+            if n:  # skip insertion
+                p_id = n
+                depth = depth + 1
+                continue
+            else:
+                cur.execute('INSERT INTO categories VALUES ("NULL", \
+                ?,?,?)', (j, p_id, depth))
+                print (j, p_id, depth)
+                p_id = cur.lastrowid
+                depth = depth + 1
+    conn.close()
+
 def get_catalogue():
     """
     Extracts catalogue metadata
@@ -64,3 +96,9 @@ def get_catalogue():
             d = d + 1
     conn.close()
     return catalogue_data
+
+
+"""
+create table categories (id integer primary key autoincrement, category, parent_id, depth, foreign key (parent_id) references categories(id));
+insert into categories values (NULL, 'top', 0, 1);
+"""
