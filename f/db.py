@@ -87,10 +87,13 @@ def get_catalogue():
     conn = sqlite3.connect('scraped.db')
     cur = conn.cursor()
     # Prepare paginator data:
-    cur.execute('SELECT category FROM categories')
+    cur.execute('SELECT * FROM categories ORDER BY category LIMIT 10')
     catalogue_data = []
-    for i in cur.fetchall()
-        catalogue_data.append(i[0])
+    print 'HI'
+    for i in cur.fetchall():
+        (c_id, category, parent_id, depth) = i
+        catalogue_data.append(str(category))
+        print len(catalogue_data)  #'This is i=%s and i[0]=' % (i, i[0])
     conn.close()
     return catalogue_data
 
