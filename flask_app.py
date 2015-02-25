@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from f.db import page_data
+from f.db import page_data, get_catalogue
 from f.nlp import summ
 
 app = Flask(__name__)
@@ -42,6 +42,7 @@ def teal():
 def iherb_visualization(page):
     paginator = {'cur_page': page, 'item_per_page': 24}
     (products, pagination) = page_data(paginator)
+    catalogue = get_catalogue()
     return render_template('iherb.htm', products=products,
                            pagination=pagination,
                            catalogue=catalogue)

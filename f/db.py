@@ -47,7 +47,7 @@ def get_cat_tree():
     """
     conn = sqlite3.connect('scraped.db')
     cur = conn.cursor()
-    cur.execute('SELECT category FROM products_var_data LIMIT 1000')
+    cur.execute('SELECT category FROM products_var_data')
     raw_categories = cur.fetchall()
     #print set(raw_categories), len(set(raw_categories)), raw_categories, len(raw_categories)
     for i in set(raw_categories):
@@ -57,22 +57,26 @@ def get_cat_tree():
         for j in categories:
             j = j.replace(';', '')
             # does this category exists already:
-            cur.execute('SELECT id FROM categories_01 WHERE depth=? \
-            AND category=?', (depth, buffer(j)))
-            n = cur.fetchone()
-            if n:  # skip insertion
-                p_id = n[0]
-                depth = depth + 1
-                continue
-            else:
+            try:
+                cur.execute('SELECT id FROM categories WHERE depth=? \
+                AND category=?', (depth, buffer(j)))
+                n = cur.fetchone()
+                if n:  # skip insertion
+                    p_id = n[0]
+                    depth = depth + 1
+                    continue
+                else:
+                    #print j
+                    #
+                    cur.execute('INSERT INTO categories(category, \
+                    parent_id, depth) VALUES (?,?,?)', (buffer(j), p_id, depth))
+                    #print (buffer(j), p_id, depth)
+                    p_id = cur.lastrowid
+                    depth = depth + 1
+                    conn.commit()
+            except ValueError:
                 print j
-                #
-                cur.execute('INSERT INTO categories_01(category, \
-                parent_id, depth) VALUES (?,?,?)', (buffer(j), p_id, depth))
-                print (buffer(j), p_id, depth)
-                p_id = cur.lastrowid
-                depth = depth + 1
-                conn.commit()
+                continue
     conn.close()    
 
 def get_catalogue():
@@ -83,21 +87,10 @@ def get_catalogue():
     conn = sqlite3.connect('scraped.db')
     cur = conn.cursor()
     # Prepare paginator data:
-    cur.execute('SELECT category FROM products_var_data')
-    raw_categories = cur.fetchall()
-    catalogue_data = ()
-    for i in raw_categories:
-        categories = i[0].split('/')[1:]
-        #print cat_list
-        d = 0  # deepth counter
-        for j in categories:  # fullfill the catalogue tree
-            for k in catalogue_data:
-                if k['name'] == j:  # this categore is already exists
-                    k['count'] = k['count'] + 1
-                    break
-            new_category = {'name': j, 'depth': d, 'count': 1}
-            catalogue_data = catalogue_data + (new_category,)
-            d = d + 1
+    cur.execute('SELECT category FROM categories')
+    catalogue_data = []
+    for i in cur.fetchall()
+        catalogue_data.append(i[0])
     conn.close()
     return catalogue_data
 
