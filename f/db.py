@@ -31,7 +31,9 @@ def page_data(paginator):
     page_data_set = []
     for i in data:
         q_var = (i[1],)
-        cur.execute('SELECT * FROM products WHERE id=?', q_var)
+        cur.execute('SELECT products.*, products_var_data.cost \
+        FROM products, products_var_data WHERE products.id=? AND \
+        products_var_data.product_id = products.id', q_var)
         product_properties = process_product_data(cur.fetchone())
         page_data_set.append(i+product_properties)
     conn.close()
