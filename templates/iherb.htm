@@ -27,7 +27,13 @@
 	<div class="thumbnail" itemscope="">
 	    <img alt="{{ product[6] }}" src="http://priceimages.s3.amazonaws.com/{{ product[4] }}">
 	    <span>{{ product[6] }}</span></br>
-	    <span>{{ product[17] }}</span></br>
+	    <span
+	       {% if product[18] %}
+	       class="label label-success label-as-badge">
+	      {% else %}
+	      class="badge">
+	      {% endif %}
+	      {{ product[17] }}</span></br>
 	    <span itemprop="brand"><b>{{ product[8] }}</b></span>
 	  <!--div itemprop="offers" itemscope="">
 	    <span class="label label-danger" itemprop="price">£2,249.00</span>
