@@ -7,7 +7,9 @@ All general functions are here
 
 replacement = {"'": '%27', '.': '%2E', '+': '%2B', '`': '%60',
                '#': '%23', ' ': '%20', '%': '%25', '\xc2': '%194',
-               '\xb7': '183'}
+               '\xb7': '%183',
+               '\xc3': '%195', '\xa9': '%169',
+               '\xe9': '%233'}
 
 
 def clean_data_set(raw_data_set):
