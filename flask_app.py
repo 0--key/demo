@@ -25,7 +25,7 @@ def ui_design():
     return render_template('ui.htm')
 
 
-@app.route('/projects/iml')
+@app.route('/iml')
 def img_launcher():
     return render_template('iml.htm')
 
