@@ -87,7 +87,8 @@
     <script src="/static/js/modal.js"></script>
 	  <script type="text/javascript">
 	    $('.img-modal').click(function(event){
-	    $('#myModal').modal('show');
+	    var p = $(this).attr('product-name')
+	    $('#'+p).modal('show');
 	    });
 	  </script>
 
