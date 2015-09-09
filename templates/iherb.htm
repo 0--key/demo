@@ -25,22 +25,15 @@
       {% endif %}
       <div class="col col-lg-4 col-sm-6">
 	<div class="thumbnail" itemscope="">
+	  <a href="#myModal" product-name="{{ product[5] }}" class="img-modal">
 	    <img alt="{{ product[6] }}" src="http://priceimages.s3.amazonaws.com/{{ product[4] }}">
 	    <span>{{ product[6] }}</span></br>
 	    <span itemprop="brand"><b>{{ product[8] }}</b></span>
-	  <!--div itemprop="offers" itemscope="">
-	    <span class="label label-danger" itemprop="price">£2,249.00</span>
-	  </div-->
 	  <div class="bs-example popover-demo">
 	    <div class="bs-example-popovers">
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal{{ product[5] }}">
-  Launch demo modal
-</button>
-
 <!-- Modal -->
-<div class="modal fade" id="myModal{{ product[5] }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="{{ product[5] }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

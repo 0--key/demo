@@ -25,11 +25,6 @@ def ui_design():
     return render_template('ui.htm')
 
 
-@app.route('/iml')
-def img_launcher():
-    return render_template('iml.htm')
-
-
 @app.route('/projects/teal', methods=['POST', 'GET'])
 def teal():
     if request.method == 'POST':
