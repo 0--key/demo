@@ -1,7 +1,7 @@
 import sqlite3
 from settings import item_per_page
 from general import clean_data_set, paginate, process_product_data
-from models import Product
+from models import Product, PageDataSet
 
 """
 Resolves interactions with DB
@@ -24,22 +24,22 @@ def page_data(paginator):
     (paginator_data, offset) = paginate(paginator, total_pages_num)
     # Prepare page dataset
     query_var = (item_per_page, offset)
-    cur.execute('SELECT * FROM img_index LIMIT ? OFFSET ?', query_var)
+    cur.execute(
+        'SELECT product_id FROM img_index LIMIT ? OFFSET ?',
+        query_var
+        )
     raw_data = cur.fetchall()
     # lets purify the raw data:
     data = clean_data_set(raw_data)
-    page_data_set = []
+    page_data = PageDataSet()
     for i in data:
-        q_var = (i[1],)
-        cur.execute('SELECT products.*, products_var_data.cost, \
-        products_var_data.is_in_stock \
-        FROM products, products_var_data WHERE products.id=? AND \
-        products_var_data.product_id = products.id', q_var)
-        product_properties = process_product_data(cur.fetchone())
-        page_data_set.append(i+product_properties)
+        p = Product(i[0])
+        #p.agg_data(cur)
+        page_data.append(p)
+        del p
     conn.close()
     catalogue = get_catalogue()
-    return page_data_set, paginator_data, catalogue
+    return page_data, paginator_data, catalogue
 
 
 def get_cat_tree():
