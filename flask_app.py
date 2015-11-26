@@ -15,6 +15,11 @@ def about():
     return render_template('about.htm', about=True)
 
 
+@app.route('/concept')
+def concept():
+    return render_template('concept.htm', concept=True)
+
+
 @app.route('/contact')
 def contact():
     return render_template('contact.htm', contact=True)
