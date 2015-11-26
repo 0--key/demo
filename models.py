@@ -11,6 +11,3 @@ class Product():
         self.t_img = ''
         self.s_img = ''
         self.l_img = ''
-"""
-How it works test
-"""
