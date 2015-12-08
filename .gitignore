@@ -57,3 +57,6 @@ target/
 # Sqlite3 files
 *.db
 
+# Emacs tmp files:
+*~
+*.desktop
